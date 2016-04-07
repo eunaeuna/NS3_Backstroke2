@@ -1,0 +1,191 @@
+waf [commands] [options]
+
+Main commands (example: ./waf build -j4)
+  build    : executes the build
+  check    : run the equivalent of the old ns-3 unit tests using test.py
+  clean    : cleans the project
+  configure: configures the project
+  dist     : makes a tarball for redistributing the sources
+  distcheck: checks if the project compiles (tarball from 'dist')
+  docs     : build all the documentation: doxygen, manual, tutorial, models
+  doxygen  : do a full build, generate the introspected doxygen and then the doxygen
+  install  : installs the targets on the system
+  list     : lists the targets to execute
+  shell    : run a shell with an environment suitably modified to run locally built programs
+  sphinx   : build the Sphinx documentation: manual, tutorial, models
+  step     : executes tasks in a step-by-step fashion, for debugging
+  uninstall: removes the targets installed
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -c COLORS, --color=COLORS
+                        whether to use colors (yes/no/auto) [default: auto]
+  -j JOBS, --jobs=JOBS  amount of parallel jobs (4)
+  -k, --keep            continue despite errors (-kk to try harder)
+  -v, --verbose         verbosity level -v -vv or -vvv [default: 0]
+  --zones=ZONES         debugging zones (task_gen, deps, tasks, etc)
+  -d BUILD_PROFILE, --build-profile=BUILD_PROFILE
+                        Specify the build profile.  Build profiles control the default compilation
+                        flags used for C/C++ programs, if CCFLAGS/CXXFLAGS are not set in the
+                        environment. [Allowed Values: 'debug', 'release', 'optimized']
+  --check-profile       print out current build profile
+  --cwd=CWD_LAUNCH      Set the working directory for a program.
+  --enable-gcov         Enable code coverage analysis. WARNING: this option only has effect with the
+                        configure command.
+  --no-task-lines       Don't print task lines, i.e. messages saying which tasks are being executed
+                        by WAF.  Coupled with a single -v will cause WAF to output only the executed
+                        commands, just like 'make' does by default.
+  --lcov-report         Generate a code coverage report (use this option at build time, not in
+                        configure)
+  --run=RUN             Run a locally built program; argument can be a program name, or a command
+                        starting with the program name.
+  --visualize           Modify --run arguments to enable the visualizer
+  --command-template=COMMAND_TEMPLATE
+                        Template of the command used to run the program given by --run; It should be
+                        a shell command string containing %s inside, which will be replaced by the
+                        actual program.
+  --pyrun=PYRUN         Run a python program using locally built ns3 python module; argument is the
+                        path to the python program, optionally followed by command-line options that
+                        are passed to the program.
+  --valgrind            Change the default command template to run programs and unit tests with
+                        valgrind
+  --shell               DEPRECATED (run ./waf shell)
+  --enable-sudo         Use sudo to setup suid bits on ns3 executables.
+  --enable-tests        Build the ns-3 tests.
+  --disable-tests       Do not build the ns-3 tests.
+  --enable-examples     Build the ns-3 examples.
+  --disable-examples    Do not build the ns-3 examples.
+  --check               DEPRECATED (run ./test.py)
+  --enable-static       Compile NS-3 statically: works only on linux, without python
+  --enable-mpi          Compile NS-3 with MPI and distributed simulation support
+  --doxygen-no-build    Run doxygen to generate html documentation from source comments, but do not
+                        wait for ns-3 to finish the full build.
+  --enable-rpath        Link programs with rpath (normally not needed, see  --run and --shell;
+                        moreover, only works in some specific platforms, such as Linux and Solaris)
+  --enable-modules=ENABLE_MODULES
+                        Build only these modules (and dependencies)
+  --boost-includes=BOOST_INCLUDES
+                        path to the boost includes root (~boost root)
+                        e.g. /path/to/boost_1_47_0
+  --boost-libs=BOOST_LIBS
+                        path to the directory where the boost libs are
+                        e.g. /path/to/boost_1_47_0/stage/lib
+  --boost-mt            select multi-threaded libraries
+  --boost-abi=BOOST_ABI
+                        select libraries with tags (gd for debug, static is automatically added),
+                        see doc Boost, Getting Started, chapter 6.1
+  --boost-linkage_autodetect
+                        auto-detect boost linkage options (don't get used to it / might break other
+                        stuff)
+  --boost-toolset=BOOST_TOOLSET
+                        force a toolset e.g. msvc, vc90,
+                        gcc, mingw, mgw45 (default: auto)
+  --boost-python=BOOST_PYTHON
+                        select the lib python with this version
+                        (default: 27)
+  --with-brite=WITH_BRITE
+                        Use BRITE integration support, given by the indicated path, to allow the use
+                        of the BRITE topology generator
+  --with-nsclick=WITH_NSCLICK
+                        Path to Click source or installation prefix for NS-3 Click Integration
+                        support
+  --disable-nsclick     Disable NS-3 Click Integration support
+  --disable-gtk         Disable GTK+ support
+  --int64x64=INT64X64_IMPL
+                        Force the choice of int64x64_t implementation (normally only for debugging).
+                        The supported implementations use int128_t, cairo_int128, or long double.
+                        The int128_t implementation (the preferred option) requires compiler support.
+                        The cairo implementation fallback provides exactly the same numerical
+                        results, but possibly at lower execution speed.  The long double
+                        implementation may not provide the same numerical results because the
+                        implementation-defined numerical precision may be less than the other
+                        implementations.  [Allowed Values: 'default', 'int128', 'double', 'cairo']
+  --disable-pthread     Whether to enable the use of POSIX threads
+  --force-planetlab     Forces compilation of PlanetLab even if not suported by the local system
+  --with-nsc=WITH_NSC   Use Network Simulation Cradle, given by the indicated path, to allow the use
+                        of real-world network stacks
+  --disable-nsc         Disable Network Simulation Cradle support
+  --with-openflow=WITH_OPENFLOW
+                        Path to OFSID source for NS-3 OpenFlow Integration support
+  --disable-python      Don't build Python bindings.
+  --apiscan=MODULE[,MODULE...]
+                        Rescan the API for the indicated module(s), for Python bindings.  Needs
+                        working GCCXML / pygccxml environment.  The metamodule 'all' expands to all
+                        available ns-3 modules.
+  --with-pybindgen=WITH_PYBINDGEN
+                        Path to an existing pybindgen source tree to use.
+  --with-python=WITH_PYTHON
+                        Path to the Python interpreter to use.
+  --no32bit-scan        Don't scan for the 32-bit variant of the bindings on 64-bit platforms.
+
+  Configuration options:
+    -o OUT, --out=OUT   build dir for the project
+    -t TOP, --top=TOP   src dir for the project
+    --check-c-compiler=CHECK_C_COMPILER
+                        list of C compilers to try [gcc clang icc]
+    --check-cxx-compiler=CHECK_CXX_COMPILER
+                        list of C++ compilers to try [g++ clang++ icpc]
+
+  Build and installation options:
+    -p, --progress      -p: progress bar; -pp: ide output
+    --targets=TARGETS   task generators, e.g. "target1,target2"
+
+  Step options:
+    --files=FILES       files to process, by regexp, e.g. "*/main.c,*/test/main.o"
+
+  Installation and uninstallation options:
+    -f, --force         force file installation
+    --distcheck-args=ARGS
+                        arguments to pass to distcheck
+
+  Installation prefix:
+    By default, "waf install" will put the files in "/usr/local/bin", "/usr/local/lib" etc. An
+    installation prefix other than "/usr/local" can be given using "--prefix", for example "--
+    prefix=$HOME"
+
+    --prefix=PREFIX     installation prefix [default: '/usr/local/']
+    --destdir=DESTDIR   installation root [default: '']
+    --exec-prefix=EXEC_PREFIX
+                        installation prefix for binaries [PREFIX]
+
+  Installation directories:
+    --bindir=BINDIR     user commands [EXEC_PREFIX/bin]
+    --sbindir=SBINDIR   system binaries [EXEC_PREFIX/sbin]
+    --libexecdir=LIBEXECDIR
+                        program-specific binaries [EXEC_PREFIX/libexec]
+    --sysconfdir=SYSCONFDIR
+                        host-specific configuration [PREFIX/etc]
+    --sharedstatedir=SHAREDSTATEDIR
+                        architecture-independent variable data [PREFIX/com]
+    --localstatedir=LOCALSTATEDIR
+                        variable data [PREFIX/var]
+    --libdir=LIBDIR     object code libraries [EXEC_PREFIX/lib]
+    --includedir=INCLUDEDIR
+                        header files [PREFIX/include]
+    --oldincludedir=OLDINCLUDEDIR
+                        header files for non-GCC compilers [/usr/include]
+    --datarootdir=DATAROOTDIR
+                        architecture-independent data root [PREFIX/share]
+    --datadir=DATADIR   architecture-independent data [DATAROOTDIR]
+    --infodir=INFODIR   GNU "info" documentation [DATAROOTDIR/info]
+    --localedir=LOCALEDIR
+                        locale-dependent data [DATAROOTDIR/locale]
+    --mandir=MANDIR     manual pages [DATAROOTDIR/man]
+    --docdir=DOCDIR     documentation root [DATAROOTDIR/doc/PACKAGE]
+    --htmldir=HTMLDIR   HTML documentation [DOCDIR]
+    --dvidir=DVIDIR     DVI documentation [DOCDIR]
+    --pdfdir=PDFDIR     PDF documentation [DOCDIR]
+    --psdir=PSDIR       PostScript documentation [DOCDIR]
+
+  Python Options:
+    --nopyc             Do not install bytecode compiled .pyc files (configuration) [Default:install]
+    --nopyo             Do not install optimised compiled .pyo files (configuration)
+                        [Default:install]
+    --python=PYTHON     python binary to be used [Default: /usr/bin/python]
+    --pythondir=PYTHONDIR
+                        Installation path for python modules (py, platform-independent .py and .pyc
+                        files)
+    --pythonarchdir=PYTHONARCHDIR
+                        Installation path for python extension (pyext, platform-dependent .so or
+                        .dylib files)

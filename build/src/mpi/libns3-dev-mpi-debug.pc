@@ -1,0 +1,10 @@
+prefix=/usr/local
+libdir=/usr/local/lib
+includedir=/usr/local/include/ns3-dev
+
+Name: libns3-mpi
+Description: ns-3 module ns3-mpi
+Version: 3-dev
+Libs: -L${libdir} -Wl,-Bdynamic -lns3-dev-mpi-debug -L/usr//lib -pthread -Wl,-rpath,/usr/lib/openmpi/lib -L/usr/lib/openmpi/lib -pthread -Wl,-rpath,/usr/lib/openmpi/lib -lmpi_cxx -lmpi -ldl -lhwloc
+Cflags: -I${includedir} -pthread -pthread -DHAVE_MPI=1 -DNS3_OPENMPI -DNS3_MPI -I/usr/lib/openmpi/include -I/usr/lib/openmpi/include/openmpi
+Requires: libns3-dev-core-debug libns3-dev-network-debug
